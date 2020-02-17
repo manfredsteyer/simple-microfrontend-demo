@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { SysEvent } from './sys-event';
 
 @Component({
   selector: 'client-b',
@@ -19,10 +21,16 @@ styles: [`
 })
 export class AppComponent {
   constructor(private route: ActivatedRoute) {
+    
     route.queryParams.subscribe(params => {
       console.debug('params', params);
     });
 
-    window.addEventListener('client-message', e => console.debug('client-message event', e));
+    const serviceBus = window['_serviceBus'] as Subject<SysEvent>;
+    serviceBus.next({
+      type: 'init',
+      args: 'client-a'
+    });
+
   }
 }

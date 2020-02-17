@@ -1,4 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
+import { Subject } from 'rxjs';
+import { SysEvent } from 'src/app/shell/sys-event';
 
 @Component({
   selector: 'client-a',
@@ -16,5 +18,12 @@ import { Component, OnInit, } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   ngOnInit() {
+
+    const serviceBus = window['_serviceBus'] as Subject<SysEvent>;
+    serviceBus.next({
+      type: 'init',
+      args: 'client-a'
+    });
+
   }
 }

@@ -4,7 +4,14 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -o"
+    "start": "ng serve -o",
+    "postinstall:bak": "ngcc",
+    "postinstall": "ngcc",
+    "build:client-a:externals": "ng build --extra-webpack-config projects/client-a//webpack.externals.js --prod --project client-a --single-bundle",
+    "build:client-b:externals": "ng build --extra-webpack-config projects/client-b//webpack.externals.js --prod --project client-b --single-bundle",
+    "build:externals": "ng build --extra-webpack-config webpack.externals.js --prod --single-bundle",
+    "build:shell:externals": "ng build --extra-webpack-config webpack.externals.js --prod --project shell --single-bundle",
+    "build:all": "npm run build:client-a:externals -- --output-hashing none && npm run build:client-b:externals -- --output-hashing none && node deploy.js"
   },
   "private": true,
   "dependencies": {

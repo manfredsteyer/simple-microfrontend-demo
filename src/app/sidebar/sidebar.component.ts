@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
-import { ShellService } from '../shell/shell.service';
+import { SimpleShellService } from '../shell/simple.shell.service';
 
 
 @Component({
     selector: 'sidebar-cmp',
     templateUrl: 'sidebar.component.html',
 })
-
 export class SidebarComponent {
-    constructor(private shellService: ShellService) {
+    constructor(private shellService: SimpleShellService) {
     }
 
-    navigate(url: string) {
-        this.shellService.navigate(url);
+    navigate(clientName: string, path: string) {
+        this.shellService.navigate(clientName, path);
     }
 }

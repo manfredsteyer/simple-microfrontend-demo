@@ -34,14 +34,12 @@ import { Router } from '@angular/router';
 export class Page1Component  {
 
     constructor(private router: Router) {
-
     }
     
     control = new FormControl();
 
     search() {
         this.router.navigate(['.'], { queryParamsHandling: 'merge', queryParams: { id: 17 }});
-        window.dispatchEvent(new CustomEvent('client-message', { detail: 17 }));
     }
 
   

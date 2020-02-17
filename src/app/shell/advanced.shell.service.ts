@@ -4,7 +4,7 @@ import { ClientConfigs, ShellConfig } from './config';
 @Injectable({
   providedIn: 'root'
 })
-export class ShellService {
+export class AdvancedShellService {
 
   constructor() { }
 
@@ -23,6 +23,15 @@ export class ShellService {
   }
 
   urlChanged() {
+    
+    //
+    // This assumes we are using hash-based routing (e. g. url#/client-a).
+    // For using path-based routing (e. g. url/client-a) we need another
+    // Strategy, b/c there is no event called when such an URL changes
+    // Hence, we need to use cross-frontend-communication (messaging)
+    // to denote we want to change the URL.
+    //
+
     for (const client in this.config.clients) {
       const entry = this.config.clients[client];
       const route = '#' + entry.route;
